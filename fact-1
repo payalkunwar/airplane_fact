@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Airplane Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+
+        .fact-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .fact {
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 4px solid #0066cc;
+            transition: background-color 0.3s;
+        }
+
+        .fact:hover {
+            background-color: #e6f3ff;
+            cursor: pointer;
+        }
+
+        .highlight {
+            background-color: #ffeb3b;
+        }
+
+        #controls {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #0052a3;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <button onclick="shuffleFacts()">Shuffle Facts</button>
+        <button onclick="resetFacts()">Reset Order</button>
+    </div>
+    <div id="factContainer" class="fact-container"></div>
+
+    <script>
+        const airplaneFacts = [
+            "The first powered flight by the Wright brothers in 1903 lasted only 12 seconds and covered 120 feet.",
+            "Commercial airplanes fly at an average altitude of 35,000 feet (10.7 km).",
+            "A typical commercial airplane has around 2-3 million parts.",
+            "Most airplanes are designed to be able to fly safely with one engine failure.",
+            "The black box in airplanes is actually orange or bright red to make it easier to find after accidents.",
+            "Modern aircraft are designed to withstand lightning strikes.",
+            "The Boeing 747 wingspan (196 feet) is longer than the Wright brothers' first flight (120 feet).",
+            "Aircraft tires are filled with nitrogen instead of regular air to prevent expansion and contraction at high altitudes.",
+            "Most aircraft can take off and land in crosswinds up to about 35mph.",
+            "The world's largest passenger aircraft, the Airbus A380, can carry up to 853 passengers.",
+            "The autopilot system is typically used for about 90% of flight time.",
+            "Aircraft windows are round to prevent structural weakness at the corners.",
+            "Commercial planes have a fresh air system that completely changes the cabin air every 2-3 minutes.",
+            "The world's first airline was established in Germany in 1909.",
+            "Modern aircraft engines are designed to run continuously for around 20,000 hours before requiring major maintenance.",
+            "The fastest commercial airplane ever was the Concorde, reaching speeds of up to Mach 2.04 (1,354 mph).",
+            "Aircraft paint can add between 600-1,200 pounds to a plane's weight.",
+            "Most commercial aircraft can fly for 60 minutes on one engine in case of emergency.",
+            "The pressure inside an aircraft cabin at cruising altitude is equivalent to being at 6,000-8,000 feet above sea level.",
+            "Every component in a commercial aircraft must have at least one backup system for safety."
+        ];
+
+        let currentFacts = [...airplaneFacts];
+
+        function displayFacts(facts) {
+            const container = document.getElementById('factContainer');
+            container.innerHTML = '';
+            facts.forEach((fact, index) => {
+                const factDiv = document.createElement('div');
+                factDiv.className = 'fact';
+                factDiv.innerHTML = `${index + 1}. ${fact}`;
+                factDiv.onclick = () => toggleHighlight(factDiv);
+                container.appendChild(factDiv);
+            });
+        }
+
+        function shuffleFacts() {
+            currentFacts = [...currentFacts].sort(() => Math.random() - 0.5);
+            displayFacts(currentFacts);
+        }
+
+        function resetFacts() {
+            currentFacts = [...airplaneFacts];
+            displayFacts(currentFacts);
+        }
+
+        function toggleHighlight(element) {
+            element.classList.toggle('highlight');
+        }
+
+        // Initial display
+        displayFacts(currentFacts);
+    </script>
+</body>
+</html>
